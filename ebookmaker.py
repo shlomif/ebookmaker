@@ -224,7 +224,7 @@ class OPFGenerator(Generator):
         if not ebookFile:
             ebookFile = '%s.epub' % os.path.join(self.baseDir, self.ebook['filename'])
 
-        print('Generating ePub file for eBook "%s".' % self.ebook['title'])
+        # print('Generating ePub file for eBook "%s".' % self.ebook['title'])
 
         epubFile = ZipFile(ebookFile, 'w')
 
@@ -281,7 +281,7 @@ class OPFGenerator(Generator):
 
         epubFile.close()
 
-        print('ePub file "%s" successfully generated.' % ebookFile)
+        # print('ePub file "%s" successfully generated.' % ebookFile)
 
 
 def parseEBookFile(ebookFile):
