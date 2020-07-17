@@ -244,10 +244,11 @@ class OPFGenerator(Generator):
             coverFile = os.path.join('OEBPS', self.ebook['cover'])
             epubFile.write(self.ebook['cover'], coverFile)
 
-        # Add images.
-        for image in self.images:
-            imageFile = os.path.join('OEBPS', image)
-            epubFile.write(image, imageFile)
+        if BEFORE_SHLOMIF_EXPLICIT_LICENSE:
+            # Add images.
+            for image in self.images:
+                imageFile = os.path.join('OEBPS', image)
+                epubFile.write(image, imageFile)
 
         if BEFORE_SHLOMIF_EXPLICIT_LICENSE:
             # Add style sheet file.
