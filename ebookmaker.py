@@ -286,9 +286,9 @@ class OPFGenerator(Generator):
             opfFile = os.path.join('OEBPS', 'content.opf')
             epubFile.writestr(opfFile, self.generateOpf(), ZIP_STORED)
 
-        # Write NCX index.
-        ncxFile = os.path.join('OEBPS', 'toc.ncx')
-        epubFile.writestr(ncxFile, self.generateNcx(), ZIP_STORED)
+            # Write NCX index.
+            ncxFile = os.path.join('OEBPS', 'toc.ncx')
+            epubFile.writestr(ncxFile, self.generateNcx(), ZIP_STORED)
 
         epubFile.close()
 
