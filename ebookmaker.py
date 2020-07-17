@@ -228,8 +228,9 @@ class OPFGenerator(Generator):
 
         epubFile = ZipFile(ebookFile, 'w')
 
-        # Write mimetype file.
-        epubFile.writestr('mimetype', 'application/epub+zip', ZIP_STORED)
+        if False:
+            # Write mimetype file.
+            epubFile.writestr('mimetype', 'application/epub+zip', ZIP_STORED)
 
         # Write META-INF directory and contents.
         epubFile.writestr(os.path.join('META-INF', 'container.xml'),
