@@ -260,8 +260,9 @@ class OPFGenerator(Generator):
             fileName = item['source']
 
             if not item['generate']:
-                dstFile = os.path.join('OEBPS', fileName)
-                epubFile.write(fileName, dstFile, ZIP_STORED)
+                if BEFORE_SHLOMIF_EXPLICIT_LICENSE:
+                    dstFile = os.path.join('OEBPS', fileName)
+                    epubFile.write(fileName, dstFile, ZIP_STORED)
                 continue
 
             if item['type'] == 'cover':
