@@ -281,9 +281,10 @@ class OPFGenerator(Generator):
                 continue
             epubFile.writestr(dstFilename, dstContents, ZIP_STORED)
 
-        # Write OPF file.
-        opfFile = os.path.join('OEBPS', 'content.opf')
-        epubFile.writestr(opfFile, self.generateOpf(), ZIP_STORED)
+        if BEFORE_SHLOMIF_EXPLICIT_LICENSE:
+            # Write OPF file.
+            opfFile = os.path.join('OEBPS', 'content.opf')
+            epubFile.writestr(opfFile, self.generateOpf(), ZIP_STORED)
 
         # Write NCX index.
         ncxFile = os.path.join('OEBPS', 'toc.ncx')
