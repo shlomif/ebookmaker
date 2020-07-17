@@ -232,9 +232,9 @@ class OPFGenerator(Generator):
             # Write mimetype file.
             epubFile.writestr('mimetype', 'application/epub+zip', ZIP_STORED)
 
-        # Write META-INF directory and contents.
-        epubFile.writestr(os.path.join('META-INF', 'container.xml'),
-                          OPFGenerator.EPUB_CONTAINER, ZIP_STORED)
+            # Write META-INF directory and contents.
+            epubFile.writestr(os.path.join('META-INF', 'container.xml'),
+                              OPFGenerator.EPUB_CONTAINER, ZIP_STORED)
 
         # Add book cover image.
         if 'cover' in self.ebook:
