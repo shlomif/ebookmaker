@@ -64,7 +64,7 @@ class Generator(object):
         with open(htmlFile, encoding='utf-8', mode='r') as f:
             soup = BeautifulSoup(f.read(), 'lxml')
             hTags = ('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
-            outline = [h for h in soup.body if getattr(h, 'name', None) in hTags and int(h.name[-1]) <= depth]
+            outline = [h for h in soup.findAll(hTags) if ( (getattr(h, 'name', None) in hTags) and int(h.name[-1]) <= depth)]
             for h in outline:
                 for br in h.findAll('br'):
                     lineBreakReplacement = ' '
