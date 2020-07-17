@@ -90,6 +90,9 @@ class Generator(object):
         raise NotImplementedError
 
 
+BEFORE_SHLOMIF_EXPLICIT_LICENSE = False
+
+
 class OPFGenerator(Generator):
 
     EPUB_CONTAINER = '''
@@ -228,7 +231,7 @@ class OPFGenerator(Generator):
 
         epubFile = ZipFile(ebookFile, 'w')
 
-        if False:
+        if BEFORE_SHLOMIF_EXPLICIT_LICENSE:
             # Write mimetype file.
             epubFile.writestr('mimetype', 'application/epub+zip', ZIP_STORED)
 
@@ -246,9 +249,10 @@ class OPFGenerator(Generator):
             imageFile = os.path.join('OEBPS', image)
             epubFile.write(image, imageFile)
 
-        # Add style sheet file.
-        style = os.path.join('OEBPS', 'style.css')
-        epubFile.write('style.css', style, ZIP_STORED)
+        if BEFORE_SHLOMIF_EXPLICIT_LICENSE:
+            # Add style sheet file.
+            style = os.path.join('OEBPS', 'style.css')
+            epubFile.write('style.css', style, ZIP_STORED)
 
         # Add content files.
         for item in self.ebook['contents']:
