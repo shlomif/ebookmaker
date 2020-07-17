@@ -266,8 +266,11 @@ class OPFGenerator(Generator):
                 continue
 
             if item['type'] == 'cover':
-                dstFilename = os.path.join('OEBPS', fileName)
-                dstContents = self.generateHtmlCover()
+                if BEFORE_SHLOMIF_EXPLICIT_LICENSE:
+                    dstFilename = os.path.join('OEBPS', fileName)
+                    dstContents = self.generateHtmlCover()
+                else:
+                    continue
             elif item['type'] == 'toc':
                 dstFilename = os.path.join('OEBPS', fileName)
                 dstContents = self.generateHtmlToCPage()
