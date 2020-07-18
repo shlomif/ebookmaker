@@ -135,14 +135,16 @@ class OPFGenerator(Generator):
         indentor = Indentor(-1)
         global counter
         counter = 0
-        def generateSection(fileName, tocItems, level):
+        def generateSection(start_index, fileName, tocItems, level):
             global counter
             nav = ''
             with indentor as ind:
-                for index, hTag in enumerate(tocItems):
+                index = start_index
+                while index < len(tocItems):
+                    hTag = tocItems[index]
                     hLevel = int(hTag.name[-1])
                     if hLevel < level:
-                        return
+                        return nav, index
                     counter += 1
                     nav += ind.indentation()
                     nav += '<navPoint id="nav{0}" playOrder="{0}">\n'.format(counter)
@@ -152,17 +154,20 @@ class OPFGenerator(Generator):
                         nav += '<navLabel><text>%s</text></navLabel>\n' % hTag.text
                         nav += ind.indentation()
                         nav += '<content src="%s"/>\n' % url
+                    next_index = index + 1
                     if index + 1 < len(tocItems):
                         nextHTag = tocItems[index + 1]
                         nextHLevel = int(nextHTag.name[-1])
                         if nextHLevel > level:
-                            nav += generateSection(fileName, tocItems[index + 1:], nextHLevel)
+                            sub_nav, next_index = generateSection(index+1, fileName, tocItems, nextHLevel)
+                            nav += sub_nav
+                    index = next_index
                     nav += ind.indentation() + '</navPoint>\n'
-            return nav
+            return nav, index
 
         nav = ''
         for fileName in self.tocList:
-            nav += generateSection(fileName, self.outline[fileName], 1)
+            nav += generateSection(0, fileName, self.outline[fileName], 1)[0]
         ncxDict['navpoints'] = nav
         return templates['ncx'].substitute(ncxDict)
 
