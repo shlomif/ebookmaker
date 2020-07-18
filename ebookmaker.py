@@ -272,8 +272,11 @@ class OPFGenerator(Generator):
                 else:
                     continue
             elif item['type'] == 'toc':
-                dstFilename = os.path.join('OEBPS', fileName)
-                dstContents = self.generateHtmlToCPage()
+                if BEFORE_SHLOMIF_EXPLICIT_LICENSE:
+                    dstFilename = os.path.join('OEBPS', fileName)
+                    dstContents = self.generateHtmlToCPage()
+                else:
+                    continue
             elif item['type'] == 'title-page':
                 dstFilename = os.path.join('OEBPS', fileName)
                 dstContents = self.generateHtmlTitlePage()
